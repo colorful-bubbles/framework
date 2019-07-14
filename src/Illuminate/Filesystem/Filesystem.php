@@ -400,6 +400,17 @@ class Filesystem
     {
         return glob($pattern, $flags);
     }
+    
+    /**
+     * Escapes special characters in path for glob.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    public function escapeGlobPath($path)
+    {
+        return preg_replace('/([\s!"#&\\\'\[\]()*?+{}|@])/', '[\\\${1}]', $path);
+    }
 
     /**
      * Get an array of all files in a directory.
